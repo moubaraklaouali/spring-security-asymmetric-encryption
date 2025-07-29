@@ -2,6 +2,7 @@ package com.alibou.app.user;
 
 
 import com.alibou.app.role.Role;
+import com.alibou.app.todo.Todo;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -91,6 +93,9 @@ public class User implements UserDetails {
             }
     )
     private List<Role> roles;
+
+    @OneToMany(mappedBy = "user")
+    private List<Todo> todos;
 
     public void addRole(final Role role) {
         this.roles.add(role);
