@@ -2,12 +2,15 @@ package com.alibou.app.user;
 
 import com.alibou.app.user.request.ChangePasswordRequest;
 import com.alibou.app.user.request.ProfileUpdateRequest;
+import com.alibou.app.user.response.UserInfo;
+
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,19 +29,17 @@ public class UserController {
     @PatchMapping("/me")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void updateProfile(
-            @RequestBody
-            @Valid
-            final ProfileUpdateRequest request,
+            @RequestBody @Valid final ProfileUpdateRequest request,
             final Authentication principal) {
         this.service.updateProfileInfo(request, getUserId(principal));
     }
 
+
+
     @PostMapping("/me/password")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void changePassword(
-            @RequestBody
-            @Valid
-            final ChangePasswordRequest request,
+            @RequestBody @Valid final ChangePasswordRequest request,
             final Authentication principal) {
         this.service.changePassword(request, getUserId(principal));
     }
@@ -65,5 +66,5 @@ public class UserController {
         return ((User) authentication.getPrincipal()).getId();
     }
 
-
+  
 }

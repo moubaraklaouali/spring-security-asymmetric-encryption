@@ -18,9 +18,9 @@ public class JwtService {
     private final PrivateKey privateKey;
     private final PublicKey publicKey;
     @Value("${app.security.jwt.access-token-expiration}")
-    private long accessTokenExpiration;
+    public long accessTokenExpiration;
     @Value("${app.security.jwt.refresh-token-expiration}")
-    private long refreshTokenExpiration;
+    public long refreshTokenExpiration;
 
     public JwtService() throws Exception {
         this.privateKey = KeyUtils.loadPrivateKey("keys/local-only/private_key.pem");
